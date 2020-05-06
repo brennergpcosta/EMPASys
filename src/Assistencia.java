@@ -5,7 +5,7 @@ public class Assistencia {
 
     public Assistencia(String nome, Tipo tipo) {
         this.nome = nome;
-        tipo = tipo;
+        this.tipo = tipo;
     }
 
     public String getNome() {
@@ -21,7 +21,7 @@ public class Assistencia {
     }
 
     public void setTipo(Tipo tipo) {
-        tipo = tipo;
+        this.tipo = tipo;
     }
 
     @Override
