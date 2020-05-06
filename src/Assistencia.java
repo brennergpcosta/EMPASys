@@ -1,11 +1,11 @@
 public class Assistencia {
 
     private String nome;
-    private Tipo Tipo;
+    private Tipo tipo;
 
     public Assistencia(String nome, Tipo tipo) {
         this.nome = nome;
-        Tipo = tipo;
+        tipo = tipo;
     }
 
     public String getNome() {
@@ -17,11 +17,11 @@ public class Assistencia {
     }
 
     public Tipo getTipo() {
-        return Tipo;
+        return tipo;
     }
 
     public void setTipo(Tipo tipo) {
-        Tipo = tipo;
+        tipo = tipo;
     }
 
     @Override
