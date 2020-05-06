@@ -6,6 +6,8 @@ public class Main {
 
     public static void main(String[] args) {
 
+        System.out.println("test");
+
         Dados.getInstance().addTipoCobertura("AUTOMOVEL");
         Dados.getInstance().addTipoCobertura("RESIDENCIA");
         Dados.getInstance().addTipoCobertura("EMPRESA");
