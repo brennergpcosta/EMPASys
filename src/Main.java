@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("test");
+        //Todo Fazer Métodos da Assistencia
 
         Dados.getInstance().addTipoCobertura("AUTOMOVEL");
         Dados.getInstance().addTipoCobertura("RESIDENCIA");
@@ -30,77 +30,77 @@ public class Main {
         int choice;
         boolean sair = false;
 
-        menuChoices();
-        while(!sair){
-            System.out.print("\n-- MENU PRINCIPAL --\n(111 para mostrar opções)\n(0 para fechar programa)\nOpção: ");
-            choice = s.nextInt();
-            s.nextLine();
-            switch (choice){
-                case 0:
-                    sair = true;
-                    break;
-                case 1:
-                    novoSegurado();
-                    break;
-                case 2:
-                    editarSegurado();
-                    break;
-                case 3:
-                    excluirSegurado();
-                    break;
-                case 4:
-                    pesquisarSegurado();
-                    break;
-                case 11:
-                    novoSeguro();
-                    break;
-                case 12:
-                    editarSeguro();
-                    break;
-                case 13:
-                    excluirSeguro();
-                    break;
-                case 14:
-                    pesquisarSeguro();
-                    break;
-                case 21:
-                    adicionarResultadoCotacao();
-                    break;
-                case 22:
-                    editarResultadoCotacao();
-                    break;
-                case 23:
-                    excluirResultadoCotacao();
-                    break;
-                case 31:
-                    adicionarCobertura();
-                    break;
-                case 32:
-                    adicionarTipoCobertura();
-                    break;
-                case 33:
-                    editarCobertura();
-                    break;
-                case 34:
-                    excluirCobertura();
-                    break;
-                case 35:
-                    excluirTipoCobertura();
-                    break;
-                case 36:
-                    pesquisarCobertura();
-                    break;
-                case 37:
-                    listarCoberturas();
-                    break;
-                case 111:
-                    menuChoices();
-                    break;
-                default:
-                    System.out.println("Opção não existe.");
-                    break;
-            }
-        }
+        menuPrincipal();
+//        while(!sair){
+//            System.out.print("\n-- MENU PRINCIPAL --\n(111 para mostrar opções)\n(0 para fechar programa)\nOpção: ");
+//            choice = s.nextInt();
+//            s.nextLine();
+//            switch (choice){
+//                case 0:
+//                    sair = true;
+//                    break;
+//                case 1:
+//                    novoSegurado();
+//                    break;
+//                case 2:
+//                    editarSegurado();
+//                    break;
+//                case 3:
+//                    excluirSegurado();
+//                    break;
+//                case 4:
+//                    pesquisarSegurado();
+//                    break;
+//                case 11:
+//                    novoSeguro();
+//                    break;
+//                case 12:
+//                    editarSeguro();
+//                    break;
+//                case 13:
+//                    excluirSeguro();
+//                    break;
+//                case 14:
+//                    pesquisarSeguro();
+//                    break;
+//                case 21:
+//                    adicionarResultadoCotacao();
+//                    break;
+//                case 22:
+//                    editarResultadoCotacao();
+//                    break;
+//                case 23:
+//                    excluirResultadoCotacao();
+//                    break;
+//                case 31:
+//                    adicionarCobertura();
+//                    break;
+//                case 32:
+//                    adicionarTipoCobertura();
+//                    break;
+//                case 33:
+//                    editarCobertura();
+//                    break;
+//                case 34:
+//                    excluirCobertura();
+//                    break;
+//                case 35:
+//                    excluirTipoCobertura();
+//                    break;
+//                case 36:
+//                    pesquisarCobertura();
+//                    break;
+//                case 37:
+//                    listarCoberturas();
+//                    break;
+//                case 111:
+//                    menuChoices();
+//                    break;
+//                default:
+//                    System.out.println("Opção não existe.");
+//                    break;
+//            }
+//        }
     }
 
     /**
@@ -473,6 +473,43 @@ public class Main {
 
     }
 
+    /**
+     * Criar nova Assistencia
+     */
+    public static void novaAssistencia(){
+
+    }
+
+    /**
+     * Editar Assistencia existente
+     */
+    public static void editarAssistencia(){
+
+    }
+
+    /**
+     * Excluir Assistencia
+     */
+    public static void excluirAssistencia(){
+
+    }
+
+    /**
+     * Pesquisar Assistencia, se existir mais de um resultado, mostrará todos os resultados obtidos que o usuário
+     *      deverá escolher um. As informações do resultado escolhido serão mostradas.
+     */
+    public static void pesquisarAssistencia(){
+
+    }
+
+    /**
+     * Pergutará ao usuário se deseja mostrar todas as assistencia de um Tipo ou mostrar todas as assistencias
+     *      existentes e separadas por tipo.
+     */
+    public static void listarAssistencia(){
+
+    }
+
     private static ArrayList<Segurado> buscarSegurado(){
         System.out.print("\nPesquisa: ");
         return Dados.getInstance().pesquisaStringSegurado(s.nextLine().toUpperCase().trim());
@@ -501,34 +538,241 @@ public class Main {
         }
     }
 
-    public static void menuChoices(){
-        System.out.println("----- Menu Principal -----");
+    public static void menuPrincipal(){
+        boolean sair = false;
+        int choice;
 
+        while(!sair) {
+            System.out.println("--------------------------");
+            System.out.println("\n----- Menu Principal -----");
+
+            System.out.println("1 - Segurado");
+            System.out.println("2 - Seguro");
+            System.out.println("3 - Cotação");
+            System.out.println("4 - Cobertura");
+            System.out.println("5 - Assistencia");
+            System.out.println("0 - Fechar Aplicação");
+
+            System.out.print("Opção: ");
+            choice = s.nextInt();
+            s.nextLine();
+
+            switch (choice) {
+                case 0:
+                    sair = true;
+                    break;
+                case 1:
+                    subMenuSegurado();
+                    break;
+                case 2:
+                    subMenuSeguro();
+                    break;
+                case 3:
+                    subMenuCotacao();
+                    break;
+                case 4:
+                    subMenuCobertura();
+                    break;
+                case 5:
+                    subMenuAssistencia();
+                    break;
+                default:
+                    System.out.println("Opção Inválida");
+            }
+        }
+    }
+
+    public static void subMenuSegurado(){
         System.out.println("\n-- Segurado --");
         System.out.println("1 - Novo segurado");
         System.out.println("2 - Editar segurado");
         System.out.println("3 - Excluir segurado");
         System.out.println("4 - Pesquisar segurado");
+        System.out.println("0 - Voltar");
 
-        System.out.println("-- Seguros --");
-        System.out.println("11 - Novo seguro");
-        System.out.println("12 - Editar seguro");
-        System.out.println("13 - Excluir seguro");
-        System.out.println("14 - Pesquisar seguro");
+        boolean voltar = false;
+        int choice;
 
-        System.out.println("-- Cotação --");
-        System.out.println("21 - Adicionar resultados de cotação");
-        System.out.println("22 - Editar resultado de cotação");
-        System.out.println("23 - Excluir resultado de cotação");
+        while(!voltar){
+            choice = s.nextInt();
+            s.nextLine();
 
-        System.out.println("-- Cobertura --");
-        System.out.println("31 - Adicionar Cobertura");
-        System.out.println("32 - Adicionar Tipo de Cobertura");
-        System.out.println("33 - Editar Cobertura");
-        System.out.println("34 - Excluir Cobertura");
-        System.out.println("35 - Excluir Tipo de Cobertura");
-        System.out.println("36 - Pesquisar Cobertura");
-        System.out.println("37 - Listar Coberturas");
+            switch (choice){
+                case 0:
+                    voltar = true;
+                    break;
+                case 1:
+                    novoSegurado();
+                    break;
+                case 2:
+                    editarSegurado();
+                    break;
+                case 3:
+                    excluirSegurado();
+                    break;
+                case 4:
+                    pesquisarSegurado();
+                    break;
+                default:
+                    System.out.println("Opção Inválida");
+            }
+        }
+    }
 
+    public static void subMenuSeguro(){
+        System.out.println("\n-- Seguro --");
+        System.out.println("1 - Novo seguro");
+        System.out.println("2 - Editar seguro");
+        System.out.println("3 - Excluir seguro");
+        System.out.println("4 - Pesquisar seguro");
+
+        boolean voltar = false;
+        int choice;
+
+        while(!voltar){
+            choice = s.nextInt();
+            s.nextLine();
+            switch(choice){
+                case 0:
+                    voltar = true;
+                    break;
+                case 1:
+                    novoSeguro();
+                    break;
+                case 2:
+                    editarSeguro();
+                    break;
+                case 3:
+                    excluirSeguro();
+                    break;
+                case 4:
+                    pesquisarSeguro();
+                    break;
+                default:
+                    System.out.println("Opção Inválida");
+            }
+        }
+    }
+
+    public static void subMenuCotacao(){
+        System.out.println("\n-- Cotação --");
+        System.out.println("1 - Adicionar resultados de cotação");
+        System.out.println("2 - Editar resultado de cotação");
+        System.out.println("3 - Excluir resultado de cotação");
+        System.out.println("0 - Voltar");
+
+        boolean voltar = false;
+        int choice;
+
+        while (!voltar){
+            choice = s.nextInt();
+            s.nextLine();
+
+            switch (choice){
+                case 0:
+                    voltar = true;
+                    break;
+                case 1:
+                    adicionarResultadoCotacao();
+                    break;
+                case 2:
+                    editarResultadoCotacao();
+                    break;
+                case 3:
+                    excluirResultadoCotacao();
+                    break;
+                default:
+                    System.out.println("Opção Inválida");
+            }
+        }
+    }
+
+    public static void subMenuCobertura(){
+        System.out.println("\n-- Cobertura --");
+
+        System.out.println("1 - Adicionar Cobertura");
+        System.out.println("2 - Adicionar Tipo de Cobertura");
+        System.out.println("3 - Editar Cobertura");
+        System.out.println("4 - Excluir Cobertura");
+        System.out.println("5 - Excluir Tipo de Cobertura");
+        System.out.println("6 - Pesquisar Cobertura");
+        System.out.println("7 - Listar Coberturas");
+        System.out.println("0 - Voltar");
+
+        boolean voltar = false;
+        int choice;
+
+        while(!voltar){
+            choice = s.nextInt();
+            s.nextLine();
+
+            switch (choice){
+                case 0:
+                    voltar = true;
+                    break;
+                case 1:
+                    adicionarCobertura();
+                    break;
+                case 2:
+                    adicionarTipoCobertura();
+                    break;
+                case 3:
+                    editarCobertura();
+                    break;
+                case 4:
+                    excluirCobertura();
+                    break;
+                case 5:
+                    pesquisarCobertura();
+                    break;
+                case 6:
+                    listarCoberturas();
+                    break;
+                default:
+                    System.out.println("Opção Inválida");
+            }
+        }
+    }
+
+    public static void subMenuAssistencia(){
+        System.out.println("\n-- Assistência --");
+        System.out.println("1 - Nova Assistencia");
+        System.out.println("2 - Editar Assistência");
+        System.out.println("3 - Excluir Assistência");
+        System.out.println("4 - Pesquisar Assistência");
+        System.out.println("5 - Lista Assistências");
+        System.out.println("0 - Voltar");
+
+        boolean voltar = false;
+        int choice;
+
+        while (!voltar){
+            choice = s.nextInt();
+            s.nextLine();
+
+            switch (choice){
+                case 0:
+                    voltar = true;
+                    break;
+                case 1:
+                    novaAssistencia();
+                    break;
+                case 2:
+                    editarAssistencia();
+                    break;
+                case 3:
+                    excluirAssistencia();
+                    break;
+                case 4:
+                    pesquisarAssistencia();
+                    break;
+                case 5:
+                    listarAssistencia();
+                    break;
+                default:
+                    System.out.println("Opção Inválida");
+                    break;
+            }
+        }
     }
 }
