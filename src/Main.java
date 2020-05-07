@@ -213,6 +213,68 @@ public class Main {
     }
 
     /**
+     * Opção 32
+     * Adicionar novo Tipo
+     */
+    private static void adicionarTipo() {
+        System.out.println("\n-- Adicionar novo Tipo --");
+        System.out.print("Nome: ");
+        String novoTipoNome = s.nextLine();
+        if(Dados.getInstance().pesquisarTipo(novoTipoNome) == null){
+            System.out.print("Confirmar novo Tipo? s/n ");
+            if(s.nextLine().equalsIgnoreCase("s")){
+                Dados.getInstance().addTipo(novoTipoNome.toUpperCase().trim());
+            }else{
+                System.out.println("Nada foi salvo.");
+            }
+        }
+
+    }
+
+    public static void editarTipo(){
+        System.out.println("\n-- Editar Tipo --\n");
+        Dados.getInstance().printTodosTipos();
+        System.out.println("\nEscolha um Tipo para ser editado.");
+        int escolha = inputIntOpcao(Dados.getInstance().getTiposCopy().size());
+        Tipo tipoParaEditar = Dados.getInstance().pesquisarTipo(escolha);
+        String novoNome = inputString("Novo Nome:");
+        if(inputString("Confirmar? s/n").equalsIgnoreCase("s")){
+            if(Dados.getInstance().editarTipo(novoNome, tipoParaEditar)){
+                System.out.println("Tipo editado com Sucesso.");
+            }else{
+                System.out.println("Ocorreu um erro.");
+            }
+        }else{
+            System.out.println("Nada foi feito.");
+        }
+    }
+
+    public static void excluirTipo(){
+        System.out.println("\n-- Excluir Tipo --");
+        Dados.getInstance().printTodosTipos();
+        System.out.println("\nEscolha um Tipo para ser excluido.");
+        int escolha = inputIntOpcao(Dados.getInstance().getTiposCopy().size());
+        Tipo tipoParaExcluir = Dados.getInstance().pesquisarTipo(escolha);
+        if(inputString("Confirmar? s/n").equalsIgnoreCase("s")){
+            Dados.getInstance().excluirTipo(tipoParaExcluir);
+            System.out.println("Tipo excluido com sucesso");
+        }else{
+            System.out.println("Nada foi feito.");
+        }
+    }
+
+    public static void pesquisarTipo(){
+        System.out.println("\n-- Pesquisar Tipo --");
+        String pesquisa = inputString("Pesquisa: ");
+        ArrayList<Tipo> resultado = Dados.getInstance().pesquisarTipoLista(pesquisa);
+        System.out.println("Resultado da pesquisa: ");
+
+    }
+    public static void listarTipo(){
+        Dados.getInstance().printTodosTipos();
+    }
+
+    /**
      * Opção 31
      * Adicionar nova cobertura
      */
@@ -243,25 +305,6 @@ public class Main {
                 break;
             }
         }
-    }
-
-    /**
-     * Opção 32
-     * Adicionar novo tipo de cobertura
-     */
-    private static void adicionarTipo() {
-        System.out.println("\n-- Adicionar novo tipo de cobertura --");
-        System.out.print("Nome: ");
-        String novoTipo = s.nextLine();
-        if(Dados.getInstance().pesquisarTipo(novoTipo) == null){
-            System.out.print("Confirmar novo tipo de cobertura? s/n ");
-            if(s.nextLine().equalsIgnoreCase("s")){
-                Dados.getInstance().addTipo(novoTipo.toUpperCase().trim());
-            }else{
-                System.out.println("Nada foi salvo.");
-            }
-        }
-
     }
 
     /**
@@ -340,7 +383,7 @@ public class Main {
             System.out.print("Confirmar exclusão? s/n ");
             String confimar = s.nextLine();
             if(confimar.equalsIgnoreCase("s")){
-                Dados.getInstance().removeTipo(tipo.getNome());
+                Dados.getInstance().excluirTipo(tipo);
                 System.out.println("Cobertura removida.");
             }else{
                 System.out.println("Nada foi feito.");
@@ -422,10 +465,6 @@ public class Main {
         System.out.println("Escolha o tipo da Assistência.");
         int escolha = s.nextInt();
         s.nextLine();
-
-
-
-
     }
 
     /**
@@ -486,6 +525,33 @@ public class Main {
         }
     }
 
+    private static String inputString(String pergunta){
+        System.out.print(pergunta + " ");
+        return s.nextLine();
+    }
+
+    private static int inputIntOpcao(int maiorNumbero){
+        System.out.print("Opção: ");
+        int escolha;
+        while(true){
+            escolha = s.nextInt();
+            s.nextLine();
+            if(escolha >= 0 && escolha <= maiorNumbero){
+                return escolha;
+            }else{
+                System.out.println("Somente números de 0 à " + maiorNumbero);
+            }
+        }
+    }
+
+    /**
+     * //------------- MENU PRINCIPAL E SUBMENUS -------------//
+     */
+
+    /**
+     * Menu Principal da aplicação
+     *      - Lista todos os Submenus
+     */
     public static void menuPrincipal(){
         boolean sair = false;
         int choice;
@@ -497,8 +563,9 @@ public class Main {
             System.out.println("1 - Segurado");
             System.out.println("2 - Seguro");
             System.out.println("3 - Cotação");
-            System.out.println("4 - Cobertura");
-            System.out.println("5 - Assistencia");
+            System.out.println("4 - Tipo");
+            System.out.println("5 - Cobertura");
+            System.out.println("6 - Assistencia");
             System.out.println("0 - Fechar Aplicação");
 
             System.out.print("Opção: ");
@@ -519,9 +586,12 @@ public class Main {
                     subMenuCotacao();
                     break;
                 case 4:
-                    subMenuCobertura();
+                    subMenuTipo();
                     break;
                 case 5:
+                    subMenuCobertura();
+                    break;
+                case 6:
                     subMenuAssistencia();
                     break;
                 default:
@@ -531,17 +601,16 @@ public class Main {
     }
 
     public static void subMenuSegurado(){
-        System.out.println("\n-- Segurado --");
-        System.out.println("1 - Novo segurado");
-        System.out.println("2 - Editar segurado");
-        System.out.println("3 - Excluir segurado");
-        System.out.println("4 - Pesquisar segurado");
-        System.out.println("0 - Voltar");
-
         boolean voltar = false;
         int choice;
 
         while(!voltar){
+            System.out.println("\n-- Segurado --");
+            System.out.println("1 - Novo segurado");
+            System.out.println("2 - Editar segurado");
+            System.out.println("3 - Excluir segurado");
+            System.out.println("4 - Pesquisar segurado");
+            System.out.println("0 - Voltar");
             choice = s.nextInt();
             s.nextLine();
 
@@ -568,18 +637,19 @@ public class Main {
     }
 
     public static void subMenuSeguro(){
-        System.out.println("\n-- Seguro --");
-        System.out.println("1 - Novo seguro");
-        System.out.println("2 - Editar seguro");
-        System.out.println("3 - Excluir seguro");
-        System.out.println("4 - Pesquisar seguro");
-
         boolean voltar = false;
         int choice;
 
         while(!voltar){
+            System.out.println("\n-- Seguro --");
+
+            System.out.println("1 - Novo seguro");
+            System.out.println("2 - Editar seguro");
+            System.out.println("3 - Excluir seguro");
+            System.out.println("4 - Pesquisar seguro");
             choice = s.nextInt();
             s.nextLine();
+
             switch(choice){
                 case 0:
                     voltar = true;
@@ -603,16 +673,16 @@ public class Main {
     }
 
     public static void subMenuCotacao(){
-        System.out.println("\n-- Cotação --");
-        System.out.println("1 - Adicionar resultados de cotação");
-        System.out.println("2 - Editar resultado de cotação");
-        System.out.println("3 - Excluir resultado de cotação");
-        System.out.println("0 - Voltar");
-
         boolean voltar = false;
         int choice;
 
         while (!voltar){
+            System.out.println("\n-- Cotação --");
+
+            System.out.println("1 - Adicionar resultados de cotação");
+            System.out.println("2 - Editar resultado de cotação");
+            System.out.println("3 - Excluir resultado de cotação");
+            System.out.println("0 - Voltar");
             choice = s.nextInt();
             s.nextLine();
 
@@ -635,22 +705,59 @@ public class Main {
         }
     }
 
-    public static void subMenuCobertura(){
-        System.out.println("\n-- Cobertura --");
-
-        System.out.println("1 - Adicionar Cobertura");
-        System.out.println("2 - Adicionar Tipo de Cobertura");
-        System.out.println("3 - Editar Cobertura");
-        System.out.println("4 - Excluir Cobertura");
-        System.out.println("5 - Excluir Tipo de Cobertura");
-        System.out.println("6 - Pesquisar Cobertura");
-        System.out.println("7 - Listar Coberturas");
-        System.out.println("0 - Voltar");
-
+    public static void subMenuTipo(){
         boolean voltar = false;
         int choice;
 
         while(!voltar){
+            System.out.println("\n-- Tipo --");
+
+            System.out.println("1 - Adicionar Tipo");
+            System.out.println("2 - Editar Tipo");
+            System.out.println("3 - Excluir Tipo");
+            System.out.println("4 - Pesquisar Tipo");
+            System.out.println("5 - Listar Tipo");
+            System.out.println("0 - Voltar");
+            choice = s.nextInt();
+            s.nextLine();
+
+            switch (choice){
+                case 0:
+                    voltar = true;
+                    break;
+                case 1:
+                    adicionarTipo();
+                case 2:
+                    editarTipo();
+                    break;
+                case 3:
+                    excluirTipo();
+                    break;
+                case 4:
+                    pesquisarTipo();
+                    break;
+                case 5:
+                    listarTipo();
+                    break;
+                default:
+                    System.out.println("Opção Inválida");
+            }
+        }
+    }
+
+    public static void subMenuCobertura(){
+        boolean voltar = false;
+        int choice;
+
+        while(!voltar){
+            System.out.println("\n-- Cobertura --");
+
+            System.out.println("1 - Adicionar Cobertura");
+            System.out.println("2 - Editar Cobertura");
+            System.out.println("3 - Excluir Cobertura");
+            System.out.println("4 - Pesquisar Cobertura");
+            System.out.println("5 - Listar Coberturas");
+            System.out.println("0 - Voltar");
             choice = s.nextInt();
             s.nextLine();
 
@@ -660,9 +767,6 @@ public class Main {
                     break;
                 case 1:
                     adicionarCobertura();
-                    break;
-                case 2:
-                    adicionarTipo();
                     break;
                 case 3:
                     editarCobertura();
@@ -683,18 +787,18 @@ public class Main {
     }
 
     public static void subMenuAssistencia(){
-        System.out.println("\n-- Assistência --");
-        System.out.println("1 - Nova Assistencia");
-        System.out.println("2 - Editar Assistência");
-        System.out.println("3 - Excluir Assistência");
-        System.out.println("4 - Pesquisar Assistência");
-        System.out.println("5 - Lista Assistências");
-        System.out.println("0 - Voltar");
-
         boolean voltar = false;
         int choice;
 
         while (!voltar){
+            System.out.println("\n-- Assistência --");
+            System.out.println("1 - Nova Assistencia");
+            System.out.println("2 - Editar Assistência");
+            System.out.println("3 - Excluir Assistência");
+            System.out.println("4 - Pesquisar Assistência");
+            System.out.println("5 - Lista Assistências");
+            System.out.println("0 - Voltar");
+
             choice = s.nextInt();
             s.nextLine();
 

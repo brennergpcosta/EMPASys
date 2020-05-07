@@ -50,20 +50,6 @@ public class Dados {
         return listaResult;
     }
 
-//    public boolean listaEditaSegurado(Segurado seguradoEditado){
-//        for (Segurado obj : listaSegurado){
-//            if (obj == seguradoEditado){
-//                obj.setNome();
-//                obj.setPf_pj(pf_pj);
-//                obj.setDataNascimento(dataNasc);
-//                obj.setEndereco(ender);
-//                obj.setCep(cep);
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
     public void listaSubstituirSegurado(Segurado oldSegurado, Segurado newSegurado){
         for (Segurado obj : listaSegurado){
             if (obj == oldSegurado){
@@ -167,8 +153,20 @@ public class Dados {
         return true;
     }
 
-    public void removeTipo(String tipoCobertura){
-        listaTipos.remove(tipoCobertura);
+    public boolean editarTipo(String nome, Tipo tipoParaEditar){
+        nome = nome.toUpperCase().trim();
+        for(Tipo obj : listaTipos){
+            if(obj.getNome().equals(nome)){
+                // Não pode ter dois Tipos com o mesmo nome
+                return false;
+            }
+        }
+        tipoParaEditar.setNome(nome);
+        return true;
+    }
+
+    public void excluirTipo(Tipo tipo){
+        listaTipos.remove(tipo);
     }
 
     public Tipo pesquisarTipo(String pesquisa){
@@ -180,14 +178,27 @@ public class Dados {
         return null;
     }
 
+    public ArrayList<Tipo> pesquisarTipoLista(String pesquisa){
+        ArrayList<Tipo> resultado = new ArrayList<>();
+        for(Tipo obj : listaTipos){
+            if(obj.getNome().contains(pesquisa)){
+                resultado.add(obj);
+            }
+        }
+        if(resultado.isEmpty()){
+            return null;
+        }
+        return resultado;
+    }
+
     public Tipo pesquisarTipo(int index){
         return listaTipos.get(index);
     }
 
     public void printTodosTipos(){
-        System.out.println("Todos os tipos de coberturas: ");
-        if(listaTipos.size() == 0){
-            System.out.println("Não há nenhum tipo de cobertura cadastrado.");
+        System.out.println("Todos os Tipos: ");
+        if(listaTipos.size() == 0 || listaTipos.isEmpty()){
+            System.out.println("Não há nenhum Tipo cadastrado.");
         }
         for (int i = 0; i < listaTipos.size(); i++) {
             System.out.println(i + " - " + listaTipos.get(i).toString());
