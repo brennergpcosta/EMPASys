@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         //Todo Fazer Métodos da Assistencia
+        //Todo Consertar a pesquisa do Tipo
 
         Dados.getInstance().addTipo("AUTOMOVEL");
         Dados.getInstance().addTipo("RESIDENCIA");
@@ -267,8 +268,10 @@ public class Main {
         System.out.println("\n-- Pesquisar Tipo --");
         String pesquisa = inputString("Pesquisa: ");
         ArrayList<Tipo> resultado = Dados.getInstance().pesquisarTipoLista(pesquisa);
-        System.out.println("Resultado da pesquisa: ");
-
+        System.out.println("Resultado da pesquisa: \n");
+        for(Tipo obj : resultado){
+            obj.toString();
+        }
     }
     public static void listarTipo(){
         Dados.getInstance().printTodosTipos();
