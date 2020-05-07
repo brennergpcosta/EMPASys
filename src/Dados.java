@@ -153,10 +153,10 @@ public class Dados {
     }
 
     /**
-     * Tipo de Cobertura
+     * Tipo
      */
 
-    public boolean addTipoCobertura(String tipo){
+    public boolean addTipo(String tipo){
         tipo = tipo.trim().toUpperCase();
         for (Tipo obj : listaTipos){
             if(obj.equals(tipo)){
@@ -167,11 +167,11 @@ public class Dados {
         return true;
     }
 
-    public void removeTipoCobertura(String tipoCobertura){
+    public void removeTipo(String tipoCobertura){
         listaTipos.remove(tipoCobertura);
     }
 
-    public Tipo pesquisarTipoCobertura(String pesquisa){
+    public Tipo pesquisarTipo(String pesquisa){
         for (Tipo tipo : listaTipos){
             if(tipo.getNome().equalsIgnoreCase(pesquisa)){
                 return tipo;
@@ -180,11 +180,11 @@ public class Dados {
         return null;
     }
 
-    public Tipo pesquisarTipoCobertura(int index){
+    public Tipo pesquisarTipo(int index){
         return listaTipos.get(index);
     }
 
-    public void printTodosTiposCoberturas(){
+    public void printTodosTipos(){
         System.out.println("Todos os tipos de coberturas: ");
         if(listaTipos.size() == 0){
             System.out.println("Não há nenhum tipo de cobertura cadastrado.");
@@ -206,6 +206,10 @@ public class Dados {
      * Cotação
      */
 
+    /**
+     * Assistência
+     */
+
     public static Dados getInstance(){
         if(dadosInstance == null){
             return dadosInstance = new Dados();
@@ -221,7 +225,7 @@ public class Dados {
         return new ArrayList<>(listaCobertura);
     }
 
-    public ArrayList<Tipo> getTiposCoberturasCopy() {
+    public ArrayList<Tipo> getTiposCopy() {
         return new ArrayList<>(listaTipos);
     }
 
@@ -234,6 +238,10 @@ public class Dados {
     }
 
     public ArrayList<Seguradora> getListaSeguradora() {
-        return listaSeguradora;
+        return new ArrayList<>(listaSeguradora);
+    }
+
+    public ArrayList<Assistencia> getListaAssistencias() {
+        return new ArrayList<>(listaAssistencias);
     }
 }

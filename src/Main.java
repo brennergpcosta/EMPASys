@@ -8,9 +8,9 @@ public class Main {
 
         //Todo Fazer Métodos da Assistencia
 
-        Dados.getInstance().addTipoCobertura("AUTOMOVEL");
-        Dados.getInstance().addTipoCobertura("RESIDENCIA");
-        Dados.getInstance().addTipoCobertura("EMPRESA");
+        Dados.getInstance().addTipo("AUTOMOVEL");
+        Dados.getInstance().addTipo("RESIDENCIA");
+        Dados.getInstance().addTipo("EMPRESA");
 
         Dados.getInstance().addCobertura("AUTOMOVEL", "DANOS MATERIAS");
         Dados.getInstance().addCobertura("AUTOMOVEL", "DANOS MORAIS");
@@ -31,76 +31,6 @@ public class Main {
         boolean sair = false;
 
         menuPrincipal();
-//        while(!sair){
-//            System.out.print("\n-- MENU PRINCIPAL --\n(111 para mostrar opções)\n(0 para fechar programa)\nOpção: ");
-//            choice = s.nextInt();
-//            s.nextLine();
-//            switch (choice){
-//                case 0:
-//                    sair = true;
-//                    break;
-//                case 1:
-//                    novoSegurado();
-//                    break;
-//                case 2:
-//                    editarSegurado();
-//                    break;
-//                case 3:
-//                    excluirSegurado();
-//                    break;
-//                case 4:
-//                    pesquisarSegurado();
-//                    break;
-//                case 11:
-//                    novoSeguro();
-//                    break;
-//                case 12:
-//                    editarSeguro();
-//                    break;
-//                case 13:
-//                    excluirSeguro();
-//                    break;
-//                case 14:
-//                    pesquisarSeguro();
-//                    break;
-//                case 21:
-//                    adicionarResultadoCotacao();
-//                    break;
-//                case 22:
-//                    editarResultadoCotacao();
-//                    break;
-//                case 23:
-//                    excluirResultadoCotacao();
-//                    break;
-//                case 31:
-//                    adicionarCobertura();
-//                    break;
-//                case 32:
-//                    adicionarTipoCobertura();
-//                    break;
-//                case 33:
-//                    editarCobertura();
-//                    break;
-//                case 34:
-//                    excluirCobertura();
-//                    break;
-//                case 35:
-//                    excluirTipoCobertura();
-//                    break;
-//                case 36:
-//                    pesquisarCobertura();
-//                    break;
-//                case 37:
-//                    listarCoberturas();
-//                    break;
-//                case 111:
-//                    menuChoices();
-//                    break;
-//                default:
-//                    System.out.println("Opção não existe.");
-//                    break;
-//            }
-//        }
     }
 
     /**
@@ -288,7 +218,7 @@ public class Main {
      */
     private static void adicionarCobertura() {
         System.out.println("\n-- Adicionar Cobertura --");
-        Dados.getInstance().printTodosTiposCoberturas();
+        Dados.getInstance().printTodosTipos();
         System.out.print("Digite o número do tipo de cobertura: ");
         int i;
         while(true){
@@ -300,7 +230,7 @@ public class Main {
                 System.out.println("Apenas números!");
             }
         }
-        Tipo tipo = Dados.getInstance().pesquisarTipoCobertura(i);
+        Tipo tipo = Dados.getInstance().pesquisarTipo(i);
         System.out.print("Nome da cobertura: (0 para sair) ");
         while(true){
             String nomeCobertura = s.nextLine();
@@ -319,14 +249,14 @@ public class Main {
      * Opção 32
      * Adicionar novo tipo de cobertura
      */
-    private static void adicionarTipoCobertura() {
+    private static void adicionarTipo() {
         System.out.println("\n-- Adicionar novo tipo de cobertura --");
         System.out.print("Nome: ");
         String novoTipo = s.nextLine();
-        if(Dados.getInstance().pesquisarTipoCobertura(novoTipo) == null){
+        if(Dados.getInstance().pesquisarTipo(novoTipo) == null){
             System.out.print("Confirmar novo tipo de cobertura? s/n ");
             if(s.nextLine().equalsIgnoreCase("s")){
-                Dados.getInstance().addTipoCobertura(novoTipo.toUpperCase().trim());
+                Dados.getInstance().addTipo(novoTipo.toUpperCase().trim());
             }else{
                 System.out.println("Nada foi salvo.");
             }
@@ -353,7 +283,7 @@ public class Main {
             break;
         }
         int i;
-        Dados.getInstance().printTodosTiposCoberturas();
+        Dados.getInstance().printTodosTipos();
         System.out.print("Digite o número do tipo de cobertura: (99 para sair) ");
         while(true){
             try {
@@ -364,7 +294,7 @@ public class Main {
                 System.out.println("Apenas números!");
             }
         }
-        Tipo novoTipo = Dados.getInstance().pesquisarTipoCobertura(i);
+        Tipo novoTipo = Dados.getInstance().pesquisarTipo(i);
         if (cobertura != null && !novoNome.equals("")) {
             cobertura.setNomeCobertura(novoNome);
             System.out.println("Nome editado");
@@ -402,7 +332,7 @@ public class Main {
      */
     public static void excluirTipoCobertura(){
         System.out.println("\n-- Excluir tipo de cobertura --");
-        Tipo tipo = Dados.getInstance().pesquisarTipoCobertura(s.nextLine().toUpperCase().trim());
+        Tipo tipo = Dados.getInstance().pesquisarTipo(s.nextLine().toUpperCase().trim());
         if(tipo != null){
             System.out.println("Tipo de combertura encontrado. ");
             System.out.println("ATENÇÃO! AO REMOVER UM TIPO DE COBERTURA, TODAS AS COBERTURAS ASSOCIADAS A ESSE\n" +
@@ -410,7 +340,7 @@ public class Main {
             System.out.print("Confirmar exclusão? s/n ");
             String confimar = s.nextLine();
             if(confimar.equalsIgnoreCase("s")){
-                Dados.getInstance().removeTipoCobertura(tipo.getNome());
+                Dados.getInstance().removeTipo(tipo.getNome());
                 System.out.println("Cobertura removida.");
             }else{
                 System.out.println("Nada foi feito.");
@@ -460,7 +390,7 @@ public class Main {
                 break;
             }
             if(choice.equals("2")){
-                Dados.getInstance().printTodosTiposCoberturas();
+                Dados.getInstance().printTodosTipos();
                 break;
             }
             if(choice.equals("0")){
@@ -477,6 +407,24 @@ public class Main {
      * Criar nova Assistencia
      */
     public static void novaAssistencia(){
+        System.out.println("\n-- Nova Assistencia --");
+
+        System.out.print("Nome: ");
+        while(true){
+            String nome = s.nextLine().toUpperCase().trim();
+            if(nome.isEmpty()){
+                System.out.println("Nome não pode ser vazio");
+            }else{
+                break;
+            }
+        }
+        Dados.getInstance().printTodosTipos();
+        System.out.println("Escolha o tipo da Assistência.");
+        int escolha = s.nextInt();
+        s.nextLine();
+
+
+
 
     }
 
@@ -714,7 +662,7 @@ public class Main {
                     adicionarCobertura();
                     break;
                 case 2:
-                    adicionarTipoCobertura();
+                    adicionarTipo();
                     break;
                 case 3:
                     editarCobertura();

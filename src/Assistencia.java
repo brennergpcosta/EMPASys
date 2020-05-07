@@ -26,6 +26,7 @@ public class Assistencia {
 
     @Override
     public String toString() {
-        return "Nome: " + nome;
+        return "Nome: " + nome + "\n" +
+                "Tipo" + tipo;
     }
 }
