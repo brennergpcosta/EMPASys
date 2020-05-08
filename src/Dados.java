@@ -221,6 +221,54 @@ public class Dados {
      * Assistência
      */
 
+    public boolean adicionarAssistencia(String nome, Tipo tipo){
+        listaAssistencias.add(new Assistencia(nome.toUpperCase().trim(), tipo));
+        return true;
+    }
+
+    public boolean editarAssistencia(String nome, Tipo tipo, Assistencia assistenciaParaEditar){
+        for(Assistencia obj : listaAssistencias){
+            if(obj.equals(assistenciaParaEditar)){
+                obj.setNome(nome.toUpperCase().trim());
+                obj.setTipo(tipo);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean excluirAssistencia(Assistencia assistenciaParaExcluir){
+        listaAssistencias.remove(assistenciaParaExcluir);
+        return true;
+    }
+
+    public ArrayList<Assistencia> pesquisarAssistenciaPeloNome(String pesquisa){
+        ArrayList<Assistencia> resultado = new ArrayList<>();
+        for(Assistencia obj : listaAssistencias){
+            if(obj.getNome().contains(pesquisa.toUpperCase().trim())){
+                resultado.add(obj);
+            }
+        }
+        if(resultado.isEmpty()){
+            return null;
+        }
+        return resultado;
+    }
+
+    public ArrayList<Assistencia> pesquisarAssistenciaPeloTipo(Tipo tipo){
+        ArrayList<Assistencia> resultado = new ArrayList<>();
+        for(Assistencia obj : listaAssistencias){
+            if(obj.getTipo().equals(tipo)){
+                resultado.add(obj);
+            }
+        }
+        if(resultado.isEmpty()){
+            return null;
+        }
+        return resultado;
+    }
+
+
     public static Dados getInstance(){
         if(dadosInstance == null){
             return dadosInstance = new Dados();

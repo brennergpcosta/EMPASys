@@ -267,11 +267,16 @@ public class Main {
     public static void pesquisarTipo(){
         System.out.println("\n-- Pesquisar Tipo --");
         String pesquisa = inputString("Pesquisa: ");
-        ArrayList<Tipo> resultado = Dados.getInstance().pesquisarTipoLista(pesquisa);
+        ArrayList<Tipo> resultado = Dados.getInstance().pesquisarTipoLista(pesquisa.toUpperCase().trim());
         System.out.println("Resultado da pesquisa: \n");
-        for(Tipo obj : resultado){
-            obj.toString();
+        if(resultado != null){
+            for(Tipo obj : resultado){
+                System.out.println(" - " + obj.toString());
+            }
+        }else{
+            System.out.println("Nenhum Tipo encontrado.");
         }
+
     }
     public static void listarTipo(){
         Dados.getInstance().printTodosTipos();
@@ -474,7 +479,7 @@ public class Main {
      * Editar Assistencia existente
      */
     public static void editarAssistencia(){
-
+        System.out.println("");
     }
 
     /**
