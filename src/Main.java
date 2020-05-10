@@ -28,9 +28,6 @@ public class Main {
         Dados.getInstance().addSegurado(
                 new Segurado("JOAO", "110", "23", "SERRADO", "33030"));
 
-        int choice;
-        boolean sair = false;
-
         menuPrincipal();
     }
 
@@ -479,7 +476,20 @@ public class Main {
      * Editar Assistencia existente
      */
     public static void editarAssistencia(){
-        System.out.println("");
+        System.out.println("\n-- Editar Assistência --");
+
+        String pesquisa = inputString("Pesquisa: ");
+        ArrayList<Assistencia> resultado = Dados.getInstance().pesquisarAssistenciaPeloNome(pesquisa);
+
+        if(resultado != null){
+            for (int i = 0; i < resultado.size(); i++) {
+                
+            }
+        }
+
+        System.out.println("Deixe o campo em branco para não altera-lo");
+        String novoNome = inputString("Novo nome: ");
+
     }
 
     /**
@@ -534,7 +544,7 @@ public class Main {
     }
 
     private static String inputString(String pergunta){
-        System.out.print(pergunta + " ");
+        System.out.print(pergunta);
         return s.nextLine();
     }
 
@@ -553,7 +563,7 @@ public class Main {
     }
 
     /**
-     * //------------- MENU PRINCIPAL E SUBMENUS -------------//
+     * //-------------------------- MENU PRINCIPAL E SUBMENUS --------------------------//
      */
 
     /**

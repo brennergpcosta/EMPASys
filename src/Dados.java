@@ -250,7 +250,14 @@ public class Dados {
             }
         }
         if(resultado.isEmpty()){
-            return null;
+            for(Assistencia obj : listaAssistencias){
+                if(obj.getTipo().getNome().equalsIgnoreCase(pesquisa.toUpperCase().trim())){
+                    resultado.add(obj);
+                }
+            }
+            if(resultado.isEmpty()){
+                return null;
+            }
         }
         return resultado;
     }
@@ -296,11 +303,11 @@ public class Dados {
         return new ArrayList<>(objetoSegurado);
     }
 
-    public ArrayList<Seguradora> getListaSeguradora() {
+    public ArrayList<Seguradora> getListaSeguradoraCopy() {
         return new ArrayList<>(listaSeguradora);
     }
 
-    public ArrayList<Assistencia> getListaAssistencias() {
+    public ArrayList<Assistencia> getListaAssistenciasCopy() {
         return new ArrayList<>(listaAssistencias);
     }
 }
